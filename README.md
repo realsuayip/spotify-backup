@@ -8,10 +8,11 @@ A simple command line tool to back up your Spotify playlists.
 usage: backup.py [-h] [--client_id CLIENT_ID] [--client_secret CLIENT_SECRET] [--filename FILENAME] playlist
 
 Dumps your spotify playlist into a CSV file.
+You may get related credentials here:
+https://developer.spotify.com/dashboard/applications
 
 positional arguments:
-  playlist              Spotify link or ID of the playlist. You may get related
-                        credentials here: https://developer.spotify.com/dashboard/applications
+  playlist              Spotify link or ID of the playlist.
 
 options:
   -h, --help            show this help message and exit

@@ -93,13 +93,13 @@ def pull(client_id, client_secret, playlist_id, filename=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Dumps your spotify playlist into a CSV file."
+        " You may get related credentials here:"
+        " https://developer.spotify.com/dashboard/applications"
     )
     parser.add_argument(
         "playlist",
         type=str,
-        help="Spotify link or ID of the playlist. You may get related"
-        " credentials here:"
-        " https://developer.spotify.com/dashboard/applications",
+        help="Spotify link or ID of the playlist.",
     )
     parser.add_argument(
         "--client_id",
