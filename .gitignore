@@ -1,0 +1,7 @@
+dist
+build
+venv
+
+.idea
+.vscode
+*.csv
