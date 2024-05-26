@@ -21,9 +21,11 @@ from urllib.parse import urlparse
 
 import requests
 
-_base_url = (
-    "https://api.spotify.com/v1/playlists/%s?fields="
-    "name,tracks(next,items(added_at,track(name,duration_ms,artists.name,album.name)))"
+BASE_URL = "https://api.spotify.com/v1/"
+PLAYLIST_URL = BASE_URL + "playlists/%(id)s/"
+TRACKS_URL = PLAYLIST_URL + (
+    "tracks?fields="
+    "next,items(added_at,track(name,duration_ms,artists.name,album.name)"
 )
 
 
@@ -67,15 +69,16 @@ def _parse_playlist(playlist):
 
 def pull(client_id, client_secret, playlist_id, filename=None):
     session = _get_authenticated_session(client_id, client_secret)
-    response = session.get(_base_url % playlist_id)
+    response = session.get(PLAYLIST_URL % {"id": playlist_id})
     assert response.status_code == 200, "Invalid playlist specified"
-    playlist = response.json()
-    tracks = playlist["tracks"]
 
+    playlist = response.json()
     filename = filename or "%s_%d" % (playlist["name"], time.time())
     csvfile = open("%s.csv" % filename, "w", newline="")
     writer = csv.writer(csvfile)
     writer.writerow(("name", "artists", "album", "duration", "added_at"))
+
+    tracks = session.get(TRACKS_URL % {"id": playlist_id}).json()
 
     while True:
         for item in tracks["items"]:
