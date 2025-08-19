@@ -25,3 +25,11 @@ options:
   --filename FILENAME   Specify a filename for the backup. Defaults to playlist
                         name with UTC timestamp.
 ```
+
+``backup.py`` is [PEP 723](https://peps.python.org/pep-0723/) compliant, so you
+can use [uv](https://github.com/astral-sh/uv) to run it without needing to
+manage a virtual environment:
+
+```
+uv run backup.py
+```
